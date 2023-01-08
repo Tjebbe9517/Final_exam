@@ -1,0 +1,110 @@
+---
+title: "Danish casualties in the German army 1914-1921"
+author: "Tjebbe A. Veltman"
+date: "2023-01-08"
+output: html_document
+---
+#Turning on library
+```{r}
+library(tidyverse)
+```
+```{r}
+library(markdown)
+```
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE,
+                      message=FALSE)
+```
+#appointing the data
+```{r}
+Data <- read.csv(file = 'data/soldiers_2.csv')
+```
+#test
+```{r}
+head(Data)[12]
+```
+#appointing data
+```{r}
+names(Data)[19] = "Country_of_death"
+```
+```{r}
+names(Data)[18] = "Place_of_death"
+```
+```{r}
+names(Data)[12] = "Age_of_death"
+```
+```{r}
+names(Data)[20] = "Date_of_death"
+```
+```{r}
+
+```
+#apponting data again
+```{r}
+Country_of_death <- Data[19]
+```
+```{r}
+Place_of_death <- Data[18]
+```
+```{r}
+Age_of_death <- Data[12]
+```
+```{r}
+Date_of_death <- Data[20]
+```
+#making the first graph
+```{r}
+Data_Countries_of_death <- Data %>% 
+  count(Country_of_death, sort = TRUE) %>% 
+  head(15)
+
+ggplot(Data_Countries_of_death, aes(y = reorder(Country_of_death, n), x = n)) + 
+  geom_bar(stat = "identity") +
+  theme_light() +
+  labs(title = "Death by country", x = "deaths", y = "country")
+```
+
+
+
+
+#second graph
+```{r}
+Data_Place_of_death <- Data %>% 
+  count(Place_of_death, sort = TRUE) %>% 
+  head(15)
+
+ggplot(Data_Place_of_death, aes(y = reorder(Place_of_death, n), x = n)) + 
+  geom_bar(stat = "identity") +
+  theme_light() +
+  labs(title = "Death by place", x = "deaths", y = "area")
+```
+
+#third graph
+```{r}
+Data_Age_of_death <- Data %>% 
+  count(Age_of_death, sort = TRUE) %>% 
+  head(15)
+
+ggplot(Data_Age_of_death, aes(y = reorder(Age_of_death, n), x = n)) + 
+  geom_bar(stat = "identity") +
+  theme_light() +
+  labs(title = "Death by Age", x = "deaths", y = "age group")
+```
+#fourth graph
+```{r}
+Data_Date_of_death <- Data %>% 
+  count(Date_of_death, sort = TRUE) %>% 
+  head(15)
+
+ggplot(Data_Date_of_death, aes(y = reorder(Date_of_death, n), x = n)) + 
+  geom_bar(stat = "identity") +
+  theme_light() +
+  labs(title = "Death by date", x = "deaths", y = "date")
+```
+
+#finishing comments; i want to thank Adela Sobotkova for teaching digital methods. Athough i wasn't the best at this course, i enjoyed her teachings and the class enviorment. Hopefully in the future i can  practise more with it, and become better at Rstudio. OpenRefine is a tool i took a liking to, and for sure will use in the future
+
+
+
+
